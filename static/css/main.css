@@ -1,0 +1,11 @@
+@font-face {
+    font-family: WendiOne;
+    myfirst: url(../fonts/WendyOne-Regular.ttf);
+}
+#brand {
+    font-family: WendiOne;
+    color: #FFF;
+}
+.nav-link {
+    color: #FFF;
+}
