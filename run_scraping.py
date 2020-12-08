@@ -1,6 +1,7 @@
 import asyncio
 import codecs
 import os, sys
+import datetime as dt
 
 from django.contrib.auth import get_user_model
 from django.db import DatabaseError
@@ -13,7 +14,7 @@ import django
 django.setup()
 
 from scraping.parsers import *
-from scraping.models import Vacancy, City, Language, Error, Url
+from scraping.models import Vacancy, Error, Url
 
 User = get_user_model()
 
@@ -21,7 +22,6 @@ parsers = (
     (hh, 'hh'),
     (hh_js, 'hh')
 )
-
 jobs, errors = [], []
 
 
@@ -78,6 +78,10 @@ for job in jobs:
         pass
 if errors:
     er = Error(data=errors).save()
+
+
 #h = codecs.open('hh.txt', 'w', 'utf-8')
 #h.write(str(jobs))
 #h.close()
+ten_days_ago = dt.date.today() - dt.timedelta(10)
+Vacancy.objects.filter(timestamp__lte=ten_days_ago).delete()

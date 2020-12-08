@@ -34,7 +34,7 @@ class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Введите пароль',
         widget=forms.PasswordInput(
             attrs={'class': 'form-control', 'placeholder': 'Пароль' }))
-    password2 = forms.CharField(label='Введите пароль ещё раз',
+    password2 = forms.CharField(label='Повторите пароль',
         widget=forms.PasswordInput(
             attrs={'class': 'form-control', 'placeholder': 'Повторите пароль'}))
 

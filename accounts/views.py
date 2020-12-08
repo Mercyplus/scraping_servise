@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 
 from accounts.forms import UserLoginForm, UserRegistrationForm, UserUpdateForm
+
 User = get_user_model()
 
 
@@ -44,7 +45,6 @@ def update_view(request):
                 data = form.cleaned_data
                 user.city = data['city']
                 user.language = data['language']
-                user.send_email = data['send_email']
                 user.save()
                 messages.success(request, 'Данные сохранены.')
                 return redirect('accounts:update')
@@ -52,7 +52,8 @@ def update_view(request):
         form = UserUpdateForm(
             initial={'city': user.city, 'language': user.language,
                      'send_email': user.send_email})
-        return render(request, 'accounts/update.html', {'form': form})
+        return render(request, 'accounts/update.html',
+                      {'form': form})
     else:
         return redirect('accounts:login')
 
