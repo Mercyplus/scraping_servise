@@ -13,7 +13,7 @@ os.environ["DJANGO_SETTINGS_MODULE"] = "myfirst.settings"
 import django
 django.setup()
 
-from scraping.parsers import *
+from scraping.parsers import hh, hh_js
 from scraping.models import Vacancy, Error, Url
 
 User = get_user_model()
