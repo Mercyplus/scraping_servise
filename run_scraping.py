@@ -1,5 +1,4 @@
 import asyncio
-import codecs
 import os, sys
 import datetime as dt
 
@@ -33,16 +32,17 @@ def get_settings():
 
 def get_urls(_settings):
     qs = Url.objects.all().values()
-    url_dct = {(q['city_id'], q['language_id']): q['url_data'] for q in qs}
+    url_dict = {(q['city_id'], q['language_id']): q['url_data'] for q in qs}
     urls = []
     for pair in _settings:
-        tmp = {}
-        tmp['city'] = pair[0]
-        tmp['language'] = pair[1]
-        url_data = url_dct.get(pair)
-        if url_data:
-            tmp['url_data'] = url_dct.get(pair)
-            urls.append(tmp)
+        if pair in url_dict:
+            tmp = {}
+            tmp['city'] = pair[0]
+            tmp['language'] = pair[1]
+            url_data = url_dict.get(pair)
+            if url_data:
+                tmp['url_data'] = url_dict.get(pair)
+                urls.append(tmp)
     return urls
 
 
@@ -59,7 +59,6 @@ loop = asyncio.get_event_loop()
 tmp_tasks = [(func, data['url_data'][key], data['city'], data['language'])
              for data in url_list
              for func, key in parsers]
-tasks = asyncio.wait([loop.create_task(main(f)) for f in tmp_tasks])
 
 #for data in url_list:
 
@@ -68,9 +67,10 @@ tasks = asyncio.wait([loop.create_task(main(f)) for f in tmp_tasks])
         #j, e = func(url, city=data['city'], language=data['language'])
         #jobs += j
         #errors += e
-
-loop.run_until_complete(tasks)
-loop.close()
+if tmp_tasks:
+    tasks = asyncio.wait([loop.create_task(main(f)) for f in tmp_tasks])
+    loop.run_until_complete(tasks)
+    loop.close()
 
 for job in jobs:
     v = Vacancy(**job)
