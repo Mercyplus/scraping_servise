@@ -15,6 +15,7 @@ headers = [
     ]
 
 
+#Функция для парсинга сайта
 def hh(url, city=None, language=None):
     jobs = []
     errors = []
@@ -45,6 +46,7 @@ def hh(url, city=None, language=None):
     return jobs, errors
 
 
+#Функция для парсинга сайта
 def hh_js(url, city=None, language=None):
     jobs = []
     errors = []

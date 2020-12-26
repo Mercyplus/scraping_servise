@@ -25,7 +25,7 @@ def list_view(request):
             _filter['language__slug'] = language
 
         qs = Vacancy.objects.filter(**_filter)
-        paginator = Paginator(qs, 10)  # Show 10 contacts per page.
+        paginator = Paginator(qs, 10)  # Показывать 10 записей на странице.
 
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)

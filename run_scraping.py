@@ -46,6 +46,7 @@ def get_urls(_settings):
     return urls
 
 
+#настройки для ассинхронного запуска
 async def main(value):
     func, url, city, language = value
     job, err = await loop.run_in_executor(None, func, url, city, language)
