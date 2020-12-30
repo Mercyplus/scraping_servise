@@ -12,14 +12,13 @@ os.environ["DJANGO_SETTINGS_MODULE"] = "myfirst.settings"
 import django
 django.setup()
 
-from scraping.parsers import hh, hh_js
+from scraping.parsers import hh
 from scraping.models import Vacancy, Error, Url
 
 User = get_user_model()
 
 parsers = (
     (hh, 'hh'),
-    (hh_js, 'hh')
 )
 jobs, errors = [], []
 
