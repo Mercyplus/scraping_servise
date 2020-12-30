@@ -46,37 +46,6 @@ def hh(url, city=None, language=None):
     return jobs, errors
 
 
-# #Функция для парсинга сайта
-# def hh_js(url, city=None, language=None):
-#     jobs = []
-#     errors = []
-#     domain = 'https://hh.ru'
-#     if url:
-#         resp = requests.get(url, headers=headers[randint(0, 2)])
-#         if resp.status_code == 200:
-#             soup = BS(resp.content, 'html.parser')
-#             main_div = soup.find('div', attrs={'class': 'vacancy-serp'})
-#             div_lst = main_div.find_all('div', attrs={'class': 'vacancy-serp-item'})
-#             for div in div_lst:
-#                 title = div.find('div', attrs={'class': 'vacancy-serp-item__row_header'})
-#                 href = title.a['href']
-#                 cont = div.find('div', attrs={'class': 'g-user-content'})
-#                 content = cont.text
-#                 company = 'No name'
-#                 a = div.find('a', attrs={'data-qa': 'vacancy-serp__vacancy-employer'})
-#                 if a:
-#                     company = a.text
-#                 jobs.append({'title': title.text, 'url': href,
-#                             'description': content, 'company': company,
-#                              'city_id': city, 'language_id': language})
-#             else:
-#                 errors.append({'url': url, 'title': "Div does not exists"})
-#         else:
-#             errors.append({'url': url, 'title': "Page do not response"})
-#
-#     return jobs, errors
-
-
 if __name__ == '__main__':
     url = 'https://hh.ru/search/vacancy?area=2&fromSearchLine=true&st=searchVacancy&text=Python&from=suggest_post'
     jobs, errors = hh(url)
